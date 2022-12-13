@@ -1,0 +1,42 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<title>birthday</title>
+</head>
+<body>
+	<script src="https://code.jquery.com/jquery-3.6.1.js"></script>
+
+	<center><h1>Страница дня рождения</h1></center>
+	<center><div class="birthday"></div></center>
+
+	<script type="text/javascript">
+		arr = document.cookie.split('; ')
+
+		arr.forEach(function(item, index, array) {
+			if (item[0] == 'd') { 
+				k = item.split("=")[1];
+			}
+		});
+
+		if (typeof(k) != "undefined" && k !== null) {
+			if (k == 0 || k == 365) {
+				$(".birthday").append("<h1>С днем рождения!!!🎂🎂🎂</h1>");
+			}else{
+				$(".birthday").append("<h1>До дня рождения "+k+" дней</h1>");
+			}
+		}else{
+			birthday = prompt('Введите дату рождения в формате: !! мм.дд.гггг !!');
+			birthday = new Date(birthday );
+			today = new Date();
+
+			birthday.setFullYear(today.getFullYear());
+			if (today > birthday) {
+			  birthday.setFullYear(today.getFullYear() + 1);
+			}
+			document.cookie = "dbirth="+(Math.floor((birthday - today) / (1000*60*60*24))+1);
+		}
+		
+	</script>
+</body>
+</html>
+
